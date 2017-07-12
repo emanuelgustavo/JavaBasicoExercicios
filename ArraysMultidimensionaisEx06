@@ -1,0 +1,150 @@
+package com.emanuel.javabasico.aula20;
+
+import java.util.Scanner;
+
+public class Ex06 {
+
+	public static void main(String[] args) {
+		
+		Scanner scan = new Scanner(System.in);
+		
+		String[][] tabuleiro = new String[3][3];
+		
+		boolean flagJogar = false;
+		
+		while ( !flagJogar ){
+			
+			System.out.println("Menu do jogo: \n1 - Iniciar Jogo \n2 - Sair");//menu inicio do jogo
+			int jogar = scan.nextInt();
+			
+			if ( jogar == 1 ){
+				
+				int rodada = 1;
+				int posX = 0;
+				int posY = 0;
+				
+				while ( rodada < 10 ) { //bloco do jogo
+					
+					if ( rodada % 2 != 0 ){
+					
+						System.out.println("É a vez do jogador 1!");
+					
+					} else {
+						
+						System.out.println("É a vez do jogador 2!");
+												
+					}
+					
+					System.out.println("Digite a posição x da jogada 0-2 da rodada " + rodada + " : " );
+					posX = scan.nextInt();
+					System.out.println("Digite a posição y da jogada 0-2 da rodada " + rodada + " : " );
+					posY = scan.nextInt();
+					
+					if ( posX >= 0 && posX <= 2){
+						
+						if ( tabuleiro[posX][posY] == null ){
+						
+							if ( rodada % 2 == 0 ){
+							
+								tabuleiro[posX][posY] = "0";
+							
+							} else {
+							
+								tabuleiro[posX][posY] = "X";
+							
+							}
+												
+							rodada++;
+						
+						} else {
+						
+							System.out.println("Jogada inválida!");
+						
+						}
+					
+						//inicio output do tabuleiro
+
+						for( int i = 0; i < tabuleiro.length; i++ ){
+						
+							System.out.print("   " + i);
+						
+						}
+					
+						System.out.println();
+					
+						for ( int i = 0; i < tabuleiro.length; i++ ){
+						
+							System.out.print(" " + i + " : ");
+						
+							for ( int j = 0; j < tabuleiro[i].length; j++ ){
+							
+								System.out.print( tabuleiro[i][j] + " | " );
+							
+							}
+						
+							System.out.println();
+					
+						}
+						
+						//final output tabuleiro
+						
+						//verificar vencedor
+					
+						if ( rodada >= 5 ){
+						
+							if ( ( tabuleiro[0][0] == "X" && tabuleiro[0][1] == "X" && tabuleiro[0][2] == "X" ) ||
+								( tabuleiro[1][0] == "X" && tabuleiro[1][1] == "X" && tabuleiro[1][2] == "X" ) ||
+								( tabuleiro[0][0] == "X" && tabuleiro[0][1] == "X" && tabuleiro[0][2] == "X" ) ||
+								( tabuleiro[0][0] == "X" && tabuleiro[1][0] == "X" && tabuleiro[2][0] == "X" ) ||
+								( tabuleiro[1][0] == "X" && tabuleiro[1][1] == "X" && tabuleiro[1][2] == "X" ) ||
+								( tabuleiro[2][0] == "X" && tabuleiro[2][1] == "X" && tabuleiro[2][2] == "X" ) ||
+								( tabuleiro[0][0] == "X" && tabuleiro[1][1] == "X" && tabuleiro[2][2] == "X" ) ||
+								( tabuleiro[0][2] == "X" && tabuleiro[1][1] == "X" && tabuleiro[2][0] == "X" ) ){
+								
+								rodada = 10;
+								System.out.println("Parabéns Jogador 1, você venceu o jogo!!");
+								
+							} else if ( ( tabuleiro[0][0] == "O" && tabuleiro[0][1] == "O" && tabuleiro[0][2] == "O" ) || //linha 1
+									( tabuleiro[1][0] == "O" && tabuleiro[1][1] == "O" && tabuleiro[1][2] == "O" ) ||     //linha 2
+									( tabuleiro[0][0] == "O" && tabuleiro[0][1] == "O" && tabuleiro[0][2] == "O" ) ||     //linha 3
+									( tabuleiro[0][0] == "O" && tabuleiro[1][0] == "O" && tabuleiro[2][0] == "O" ) ||     //coluna 1
+									( tabuleiro[1][0] == "O" && tabuleiro[1][1] == "O" && tabuleiro[1][2] == "O" ) ||	  //coluna 2
+									( tabuleiro[2][0] == "O" && tabuleiro[2][1] == "O" && tabuleiro[2][2] == "O" ) ||     //coluna 3
+									( tabuleiro[0][0] == "O" && tabuleiro[1][1] == "O" && tabuleiro[2][2] == "O" ) ||
+									( tabuleiro[0][2] == "O" && tabuleiro[1][1] == "O" && tabuleiro[2][0] == "O" ) ){
+									
+									rodada = 10;
+									System.out.println("Parabéns Jogador 2, você venceu o jogo!!");
+									
+									
+							} else if ( rodada > 9) {
+																
+										System.out.println("O jogo deu empate!");
+										rodada++;
+										
+							}
+			
+						}
+				
+					} else {
+						
+						System.out.println("posição inválida! Digite novamente!");
+												
+					}
+					
+				}
+			
+			} else if ( jogar == 2){
+				
+				System.out.println("Você saiu do jogo!");
+				flagJogar = true;
+				
+			} 
+				
+		}
+		
+		scan.close();
+
+	}
+	
+}
