@@ -46,7 +46,7 @@ public class Ex06 {
 						
 							if ( rodada % 2 == 0 ){
 							
-								tabuleiro[posX][posY] = "0";
+								tabuleiro[posX][posY] = "O";
 							
 							} else {
 							
